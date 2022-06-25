@@ -6,7 +6,11 @@ eureka:
     register-with-eureka: true
     fetch-registry: true
     service-url:
-      defaultZone: http://localhost:8761/eureka
+      defaultZone: "${PROTOCOLO}://${EUREKA_SERVER_URL}:${EUREKA_SERVER_PORT}/eureka"
+  instance:
+    prefer-ip-address: true
+    ip-address: ${IP_CONTAINER}
+    instance-id: "${IP_CONTAINER}:${server.port}"
       
 security:
   oauth2:

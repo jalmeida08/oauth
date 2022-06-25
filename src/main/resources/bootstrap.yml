@@ -2,7 +2,7 @@ spring:
   application:
     name: 'oauth'
   profiles:
-    active: default
+    active: ${PROFILE}
   cloud:
     config:
-      uri: http://localhost:8888
+      uri: "${PROTOCOLO}://${CONFIG_SERVER_URL}:${CONFIG_SERVER_PORT}"
