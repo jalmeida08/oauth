@@ -20,10 +20,14 @@ public class UsuarioService implements UserDetailsService {
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		Optional<Usuario> u = this.usuarioRepository.findByEmail(username);
-		if(u.isPresent())
-			return u.get();
 		
-		throw new UsernameNotFoundException("Dados inválido");
+		if(!u.isPresent())
+			throw new UsernameNotFoundException("Dados inválido");
+		if(u.isPresent() && !u.get().isAtivo())
+			throw new RuntimeException("Efetue o primeiro log-in");
+			
+		return u.get();
+		
 	}
 	
 }
